@@ -1,8 +1,9 @@
 package main
 
 import (
-	"certreader/cli"
 	"os"
+
+	"github.com/brcrwilliams/tlstools/cmd/x509meta/cli"
 )
 
 func main() {

@@ -1,11 +1,12 @@
 package cli
 
 import (
-	"certreader"
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
+	"github.com/brcrwilliams/tlstools"
 	"github.com/spf13/cobra"
 )
 
@@ -15,8 +16,8 @@ func NewCommand() *cobra.Command {
 	var der string
 	var chain bool
 	cmd := &cobra.Command{
-		Use: "certreader [--remote host:port | --pem filepath | --der filepath] [--chain]",
-		Long: `certreader is a tool for inspecting x509 certificate attributes.
+		Use: "x509meta [--remote host:port | --pem filepath | --der filepath] [--chain]",
+		Long: `x509meta is a tool for inspecting x509 certificate attributes.
 It will output a JSON document in a similar format to ` + "`openssl x509 -text -noout`." + `
 It can read certificates from a remote address, or from a file.
 If --chain is given, then it will return the full certificate chain from the remote address.
@@ -41,6 +42,9 @@ to either --pem or --der.`,
 				return fmt.Errorf("Only one of --remote, --pem, or --der can be used at a time")
 			}
 			if addr != "" {
+				if !strings.Contains(addr, ":") {
+					addr = addr + ":443"
+				}
 				return getRemote(addr, chain)
 			}
 			if pem != "" {
@@ -54,7 +58,7 @@ to either --pem or --der.`,
 	}
 
 	flags := cmd.Flags()
-	flags.StringVar(&addr, "remote", "", "The host:port of the remote address to read certificates from: example.com:443")
+	flags.StringVar(&addr, "remote", "", "The host:port of the remote address to read certificates from: example.com:443 (defaults to port 443)")
 	flags.StringVar(&pem, "pem", "", "The path to a PEM file to read certificates from.")
 	flags.StringVar(&der, "der", "", "The path to a DER file to read certficates from.")
 	flags.BoolVar(&chain, "chain", false, "Used with --remote - If given, will print the full chain of certs.")
@@ -62,19 +66,19 @@ to either --pem or --der.`,
 }
 
 func getRemote(addr string, chain bool) error {
-	certs, err := certreader.Dial(addr)
+	certs, err := tlstools.Dial(addr)
 	if err != nil {
 		return err
 	}
 
 	if !chain {
-		return certreader.WriteCert(os.Stdout, certs[0])
+		return tlstools.WriteX509Meta(os.Stdout, certs[0])
 	}
 
-	return certreader.WriteCerts(os.Stdout, certs)
+	return tlstools.WriteX509Metas(os.Stdout, certs)
 }
 
-func getReader(input string) (io.Reader, error) {
+func getReader(input string) (io.ReadCloser, error) {
 	if input == "-" {
 		return os.Stdin, nil
 	}
@@ -92,13 +96,14 @@ func getPEM(path string) error {
 	if err != nil {
 		return err
 	}
+	defer reader.Close()
 
-	certs, err := certreader.ReadPEM(reader)
+	certs, err := tlstools.ReadPEM(reader)
 	if err != nil {
 		return err
 	}
 
-	return certreader.WriteCerts(os.Stdout, certs)
+	return tlstools.WriteX509Metas(os.Stdout, certs)
 }
 
 func getDER(path string) error {
@@ -106,11 +111,12 @@ func getDER(path string) error {
 	if err != nil {
 		return err
 	}
+	defer reader.Close()
 
-	cert, err := certreader.ReadDER(reader)
+	cert, err := tlstools.ReadDER(reader)
 	if err != nil {
 		return err
 	}
 
-	return certreader.WriteCert(os.Stdout, cert)
+	return tlstools.WriteX509Meta(os.Stdout, cert)
 }

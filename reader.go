@@ -1,7 +1,6 @@
-package certreader
+package tlstools
 
 import (
-	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
@@ -9,15 +8,10 @@ import (
 	"io/ioutil"
 )
 
-func Dial(addr string) ([]*x509.Certificate, error) {
-	conn, err := tls.Dial("tcp", addr, &tls.Config{InsecureSkipVerify: true})
-	if err != nil {
-		return nil, fmt.Errorf("connection error: %w", err)
-	}
-
-	return conn.ConnectionState().PeerCertificates, nil
-}
-
+// ReadPEM will read raw bytes from io.Reader
+// and then parse them into *x509.Certificates.
+// It will return an error if the input contains non-certificate
+// PEMs, or if one of the PEMs is invalid.
 func ReadPEM(reader io.Reader) ([]*x509.Certificate, error) {
 	data, err := ioutil.ReadAll(reader)
 	if err != nil {
@@ -47,6 +41,9 @@ func ReadPEM(reader io.Reader) ([]*x509.Certificate, error) {
 	return certs, nil
 }
 
+// ReadDER will read the raw input bytes and parse them as
+// a DER-encoded certificate. It expects the input to contain
+// only one certificate, since DER does not have delimiters.
 func ReadDER(reader io.Reader) (*x509.Certificate, error) {
 	data, err := ioutil.ReadAll(reader)
 	if err != nil {

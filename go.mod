@@ -1,4 +1,4 @@
-module certreader
+module github.com/brcrwilliams/tlstools
 
 go 1.15
 

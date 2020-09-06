@@ -1,4 +1,4 @@
-package certreader
+package tlstools
 
 import (
 	"crypto/dsa"

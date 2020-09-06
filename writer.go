@@ -1,8 +1,9 @@
-package certreader
+package tlstools
 
 import (
 	"crypto/x509"
 	"encoding/json"
+	"encoding/pem"
 	"io"
 )
 
@@ -12,18 +13,28 @@ func prettyEncoder(out io.Writer) *json.Encoder {
 	return e
 }
 
-// WriteCert takes an *x509.Certificate and
-// writes it to out in OpenSSL JSON format.
-func WriteCert(out io.Writer, cert *x509.Certificate) error {
+// WriteX509Meta takes an *x509.Certificate and
+// writes the x509 metadata to out in OpenSSL JSON format.
+func WriteX509Meta(out io.Writer, cert *x509.Certificate) error {
 	return prettyEncoder(out).Encode(CertToOpenSSL(cert))
 }
 
-// WriteCerts takes a slice of *x509.Certificates and
-// writes them to out in OpenSSL JSON format.
-func WriteCerts(out io.Writer, certs []*x509.Certificate) error {
+// WriteX509Metas takes a slice of *x509.Certificates and
+// writes the x509 metadata to out in OpenSSL JSON format.
+func WriteX509Metas(out io.Writer, certs []*x509.Certificate) error {
 	all := []*OpenSSLFormat{}
 	for _, cert := range certs {
 		all = append(all, CertToOpenSSL(cert))
 	}
 	return prettyEncoder(out).Encode(&all)
+}
+
+// WritePEM encodes the given certificate to PEM
+// and writes it to out.
+func WritePEM(out io.Writer, cert *x509.Certificate) error {
+	block := &pem.Block{
+		Type:  "CERTIFICATE",
+		Bytes: cert.Raw,
+	}
+	return pem.Encode(out, block)
 }
