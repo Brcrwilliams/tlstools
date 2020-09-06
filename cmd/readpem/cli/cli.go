@@ -11,7 +11,8 @@ import (
 func NewCommand() *cobra.Command {
 	return &cobra.Command{
 		Use: "readpem [host:port]",
-		Long: `readpem is a tool to retrieve all the peer certificate PEMs from a remote address.
+		Long: `readpem is a tool to retrieve all of the peer certificate PEMs from a remote address.
+It takes the address in the form of host:port as a single positional argument.
 If no port is given, it will default to port 443.
 It will output the certificates to stdout, and can be piped as needed.
 Ex: readpem example.com:443 > chain.pem
