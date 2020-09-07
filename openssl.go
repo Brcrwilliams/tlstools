@@ -289,6 +289,7 @@ func extendedKeyUsageToString(use x509.ExtKeyUsage) string {
 	return "Unknown"
 }
 
+// BasicConstraints represents the Basic Constraints extension.
 type BasicConstraints struct {
 	CA                bool
 	MaxPathLength     int
@@ -303,10 +304,13 @@ func newBasicConstraints(cert *x509.Certificate) *BasicConstraints {
 	}
 }
 
+// MaxPathIsNil is used to determine if MaxPathLength is zero or unset.
 func (b *BasicConstraints) MaxPathIsNil() bool {
 	return !b.maxPathLengthZero && b.MaxPathLength == 0
 }
 
+// MarshalJSON converts the BasicConstraints into JSON.
+// If MatxPathLength is nil, then it will be ommitted.
 func (b *BasicConstraints) MarshalJSON() ([]byte, error) {
 	j := map[string]interface{}{}
 	j["CA"] = b.CA
@@ -316,6 +320,8 @@ func (b *BasicConstraints) MarshalJSON() ([]byte, error) {
 	return json.Marshal(j)
 }
 
+// AuthorityInformation is...
+// only grouped here because that's what openssl does.
 type AuthorityInformation struct {
 	OCSP      []string
 	CAIssuers []string

@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 )
 
-// ReadPEM will read raw bytes from io.Reader
+// ReadPEM will read PEM-encoded certificates from reader
 // and then parse them into *x509.Certificates.
 // It will return an error if the input contains non-certificate
 // PEMs, or if one of the PEMs is invalid.
@@ -41,8 +41,8 @@ func ReadPEM(reader io.Reader) ([]*x509.Certificate, error) {
 	return certs, nil
 }
 
-// ReadDER will read the raw input bytes and parse them as
-// a DER-encoded certificate. It expects the input to contain
+// ReadDER will a DER-encoded certificate from reader and parse
+// it into an *x509.Certificate. It expects the input to contain
 // only one certificate, since DER does not have delimiters.
 func ReadDER(reader io.Reader) (*x509.Certificate, error) {
 	data, err := ioutil.ReadAll(reader)

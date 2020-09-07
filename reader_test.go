@@ -1,10 +1,11 @@
 package tlstools_test
 
 import (
-	"github.com/brcrwilliams/tlstools"
 	"encoding/hex"
 	"fmt"
 	"os"
+
+	"github.com/brcrwilliams/tlstools"
 )
 
 func ExampleReadPEM() {
