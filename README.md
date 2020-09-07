@@ -1,5 +1,7 @@
 # TLS Tools for Humans
 
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/brcrwilliams/tlstools)](https://pkg.go.dev/github.com/brcrwilliams/tlstools)
+
 This repository provides some command line tools and libraries that are intended
 to replace some of the common certificate-viewing commands from openssl, such as `openssl s_client` and `openssl x509`.
 
@@ -316,3 +318,8 @@ $ x509meta --pem chain.pem
   }
 ]
 ```
+
+## Library
+
+The CLI tools are wrappers around a public API.
+You can read the reference docs on [pkg.go.dev](https://pkg.go.dev/github.com/brcrwilliams/tlstools).
