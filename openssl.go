@@ -213,42 +213,41 @@ func newX509v3Extensions(cert *x509.Certificate) *X509v3Extensions {
 	}
 }
 
-// TODO: The output of this seems wrong. How to fix?
 func keyUsageToStrings(use x509.KeyUsage) []string {
 	usages := []string{}
-	if (use & x509.KeyUsageCRLSign) == 0 {
+	if (use & x509.KeyUsageCRLSign) != 0 {
 		usages = append(usages, "CRL Sign")
 	}
 
-	if (use & x509.KeyUsageCertSign) == 0 {
+	if (use & x509.KeyUsageCertSign) != 0 {
 		usages = append(usages, "Cert Sign")
 	}
 
-	if (use & x509.KeyUsageContentCommitment) == 0 {
+	if (use & x509.KeyUsageContentCommitment) != 0 {
 		usages = append(usages, "Content Commitment")
 	}
 
-	if (use & x509.KeyUsageDataEncipherment) == 0 {
+	if (use & x509.KeyUsageDataEncipherment) != 0 {
 		usages = append(usages, "Data Encipherment")
 	}
 
-	if (use & x509.KeyUsageDecipherOnly) == 0 {
+	if (use & x509.KeyUsageDecipherOnly) != 0 {
 		usages = append(usages, "Decipher Only")
 	}
 
-	if (use & x509.KeyUsageDigitalSignature) == 0 {
+	if (use & x509.KeyUsageDigitalSignature) != 0 {
 		usages = append(usages, "Digital Signature")
 	}
 
-	if (use & x509.KeyUsageEncipherOnly) == 0 {
+	if (use & x509.KeyUsageEncipherOnly) != 0 {
 		usages = append(usages, "Encipher Only")
 	}
 
-	if (use & x509.KeyUsageKeyAgreement) == 0 {
+	if (use & x509.KeyUsageKeyAgreement) != 0 {
 		usages = append(usages, "Key Agreement")
 	}
 
-	if (use & x509.KeyUsageKeyEncipherment) == 0 {
+	if (use & x509.KeyUsageKeyEncipherment) != 0 {
 		usages = append(usages, "Key Encipherment")
 	}
 

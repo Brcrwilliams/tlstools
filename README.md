@@ -155,13 +155,8 @@ $ x509meta --remote github.com
   },
   "X509v3Extensions": {
     "KeyUsage": [
-      "CRL Sign",
-      "Cert Sign",
-      "Content Commitment",
-      "Data Encipherment",
-      "Decipher Only",
-      "Encipher Only",
-      "Key Agreement"
+      "Digital Signature",
+      "Key Encipherment"
     ],
     "ExtendedKeyUsage": [
       "Server Auth",
@@ -221,13 +216,8 @@ $ x509meta --pem chain.pem
     },
     "X509v3Extensions": {
       "KeyUsage": [
-        "CRL Sign",
-        "Cert Sign",
-        "Content Commitment",
-        "Data Encipherment",
-        "Decipher Only",
-        "Encipher Only",
-        "Key Agreement"
+        "Digital Signature",
+        "Key Encipherment"
       ],
       "ExtendedKeyUsage": [
         "Server Auth",
@@ -282,12 +272,9 @@ $ x509meta --pem chain.pem
     },
     "X509v3Extensions": {
       "KeyUsage": [
-        "Content Commitment",
-        "Data Encipherment",
-        "Decipher Only",
-        "Encipher Only",
-        "Key Agreement",
-        "Key Encipherment"
+        "CRL Sign",
+        "Cert Sign",
+        "Digital Signature"
       ],
       "ExtendedKeyUsage": [
         "Server Auth",
