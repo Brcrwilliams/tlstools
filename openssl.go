@@ -16,42 +16,29 @@ import (
 // It's intended to output JSON which looks similar to the output
 // of `openssl x509 -text`.
 type OpenSSLFormat struct {
-	Version                 int
-	SerialNumber            string
-	Issuer                  string
-	Subject                 string
-	Validity                *Validity
-	SubjectPublicKeyInfo    *SubjectPublicKeyInfo
-	X509v3Extensions        *X509v3Extensions
-	AuthorityInformation    *AuthorityInformation
-	SubjectAlternativeNames []string
-	CertificatePolicies     []string
-	CRLDistributionPoints   []string
-	SignatureAlgorithm      string
-	Signature               string
+	Version              int
+	SerialNumber         string
+	Issuer               string
+	Subject              string
+	Validity             *Validity
+	SubjectPublicKeyInfo *SubjectPublicKeyInfo
+	X509v3Extensions     *X509v3Extensions
+	SignatureAlgorithm   string
+	Signature            string
 }
 
 // CertToOpenSSL converts an *x509.Certificate into OpenSSLFormat.
 func CertToOpenSSL(cert *x509.Certificate) *OpenSSLFormat {
-	policies := []string{}
-	for _, policy := range cert.PolicyIdentifiers {
-		policies = append(policies, policy.String())
-	}
-
 	return &OpenSSLFormat{
-		Version:                 cert.Version,
-		SerialNumber:            encodeColonSeparatedHex(cert.SerialNumber.Bytes()),
-		Issuer:                  cert.Issuer.String(),
-		Subject:                 cert.Subject.String(),
-		Validity:                newValidity(cert),
-		SubjectPublicKeyInfo:    newSubjectPublicKeyInfo(cert),
-		X509v3Extensions:        newX509v3Extensions(cert),
-		AuthorityInformation:    newAuthorityInformation(cert),
-		SubjectAlternativeNames: getAltNames(cert),
-		CertificatePolicies:     policies,
-		CRLDistributionPoints:   cert.CRLDistributionPoints,
-		SignatureAlgorithm:      cert.SignatureAlgorithm.String(),
-		Signature:               encodeColonSeparatedHex(cert.Signature),
+		Version:              cert.Version,
+		SerialNumber:         encodeColonSeparatedHex(cert.SerialNumber.Bytes()),
+		Issuer:               cert.Issuer.String(),
+		Subject:              cert.Subject.String(),
+		Validity:             newValidity(cert),
+		SubjectPublicKeyInfo: newSubjectPublicKeyInfo(cert),
+		X509v3Extensions:     newX509v3Extensions(cert),
+		SignatureAlgorithm:   cert.SignatureAlgorithm.String(),
+		Signature:            encodeColonSeparatedHex(cert.Signature),
 	}
 }
 
@@ -191,11 +178,15 @@ func newEd25519PublicKeyInfo(key ed25519.PublicKey) *ed25519PublicKeyInfo {
 
 // X509v3Extensions contains the x509 v3 Extenions
 type X509v3Extensions struct {
-	KeyUsage               []string
-	ExtendedKeyUsage       []string
-	BasicConstraints       *BasicConstraints
-	SubjectKeyIdentifier   string
-	AuthorityKeyIdentifier string
+	KeyUsage                []string
+	ExtendedKeyUsage        []string
+	BasicConstraints        *BasicConstraints
+	SubjectKeyIdentifier    string
+	AuthorityKeyIdentifier  string
+	AuthorityInformation    *AuthorityInformation
+	SubjectAlternativeNames []string
+	CertificatePolicies     []string
+	CRLDistributionPoints   []string
 }
 
 func newX509v3Extensions(cert *x509.Certificate) *X509v3Extensions {
@@ -204,12 +195,21 @@ func newX509v3Extensions(cert *x509.Certificate) *X509v3Extensions {
 		extendedUsage = append(extendedUsage, extendedKeyUsageToString(use))
 	}
 
+	policies := []string{}
+	for _, policy := range cert.PolicyIdentifiers {
+		policies = append(policies, policy.String())
+	}
+
 	return &X509v3Extensions{
-		KeyUsage:               keyUsageToStrings(cert.KeyUsage),
-		ExtendedKeyUsage:       extendedUsage,
-		BasicConstraints:       newBasicConstraints(cert),
-		SubjectKeyIdentifier:   encodeColonSeparatedHex(cert.SubjectKeyId),
-		AuthorityKeyIdentifier: encodeColonSeparatedHex(cert.AuthorityKeyId),
+		KeyUsage:                keyUsageToStrings(cert.KeyUsage),
+		ExtendedKeyUsage:        extendedUsage,
+		BasicConstraints:        newBasicConstraints(cert),
+		SubjectKeyIdentifier:    encodeColonSeparatedHex(cert.SubjectKeyId),
+		AuthorityKeyIdentifier:  encodeColonSeparatedHex(cert.AuthorityKeyId),
+		AuthorityInformation:    newAuthorityInformation(cert),
+		SubjectAlternativeNames: getAltNames(cert),
+		CertificatePolicies:     policies,
+		CRLDistributionPoints:   cert.CRLDistributionPoints,
 	}
 }
 
