@@ -167,28 +167,28 @@ $ x509meta --remote github.com
       "MaxPathLength": -1
     },
     "SubjectKeyIdentifier": "63:02:d2:5d:02:5f:f7:8d:d5:5a:12:9e:76:11:36:96:86:2c:8a:48",
-    "AuthorityKeyIdentifier": "51:68:ff:90:af:02:07:75:3c:cc:d9:65:64:62:a2:12:b8:59:72:3b"
-  },
-  "AuthorityInformation": {
-    "OCSP": [
-      "http://ocsp.digicert.com"
+    "AuthorityKeyIdentifier": "51:68:ff:90:af:02:07:75:3c:cc:d9:65:64:62:a2:12:b8:59:72:3b",
+    "AuthorityInformation": {
+      "OCSP": [
+        "http://ocsp.digicert.com"
+      ],
+      "CAIssuers": [
+        "http://cacerts.digicert.com/DigiCertSHA2HighAssuranceServerCA.crt"
+      ]
+    },
+    "SubjectAlternativeNames": [
+      "DNS:github.com",
+      "DNS:www.github.com"
     ],
-    "CAIssuers": [
-      "http://cacerts.digicert.com/DigiCertSHA2HighAssuranceServerCA.crt"
+    "CertificatePolicies": [
+      "2.16.840.1.114412.1.1",
+      "2.23.140.1.2.2"
+    ],
+    "CRLDistributionPoints": [
+      "http://crl3.digicert.com/sha2-ha-server-g6.crl",
+      "http://crl4.digicert.com/sha2-ha-server-g6.crl"
     ]
   },
-  "SubjectAlternativeNames": [
-    "DNS:github.com",
-    "DNS:www.github.com"
-  ],
-  "CertificatePolicies": [
-    "2.16.840.1.114412.1.1",
-    "2.23.140.1.2.2"
-  ],
-  "CRLDistributionPoints": [
-    "http://crl3.digicert.com/sha2-ha-server-g6.crl",
-    "http://crl4.digicert.com/sha2-ha-server-g6.crl"
-  ],
   "SignatureAlgorithm": "SHA256-RSA",
   "Signature": "86:32:8f:9c:15:b8:af:e8:d1:de:08:3a:44:0e:71:20:24:d6:fc:0e:58:31:cc:aa:b4:ad:1c:d5:0c:c5:af:c4:bb:fe:5f:ac:90:6a:42:c8:21:eb:25:f1:6b:2c:37:b2:2a:a8:1a:6e:f2:d1:4f:a6:2f:bc:cf:3a:d8:c1:9f:30:c0:ec:93:eb:0a:5a:dc:cb:6c:32:1c:60:6e:ec:6e:f8:86:a5:4f:a0:b4:6d:6a:07:4a:21:58:d0:29:7d:65:8a:c8:da:6a:ba:ab:f0:75:21:33:00:40:6f:85:c5:13:e6:27:73:6c:ae:ea:e3:96:d0:53:db:c1:21:68:10:cf:e3:d8:50:b0:14:ec:a9:98:cf:b8:ce:61:5d:3d:a3:6d:93:34:c4:13:fa:11:66:a3:dd:be:10:19:70:49:e2:04:4d:81:2c:1f:2e:59:c6:2c:53:45:3b:ee:f6:13:f4:d0:2c:84:6e:28:6d:e4:e4:ca:e4:48:89:1b:ab:ec:22:1f:ee:12:d4:6c:75:e9:cc:0b:15:74:e9:6d:9f:db:40:1f:e2:24:85:a3:4b:a4:e9:cd:6b:c8:77:9f:87:4f:05:73:00:38:a5:23:54:68:fc:a2:3d:bf:18:19:0e:a8:fd:b9:5e:8c:5c:e8:fc:e4:a2:52:70:ee:79:a7:d2:27:4a:7a:49"
 }
@@ -228,28 +228,28 @@ $ x509meta --pem chain.pem
         "MaxPathLength": -1
       },
       "SubjectKeyIdentifier": "63:02:d2:5d:02:5f:f7:8d:d5:5a:12:9e:76:11:36:96:86:2c:8a:48",
-      "AuthorityKeyIdentifier": "51:68:ff:90:af:02:07:75:3c:cc:d9:65:64:62:a2:12:b8:59:72:3b"
-    },
-    "AuthorityInformation": {
-      "OCSP": [
-        "http://ocsp.digicert.com"
+      "AuthorityKeyIdentifier": "51:68:ff:90:af:02:07:75:3c:cc:d9:65:64:62:a2:12:b8:59:72:3b",
+      "AuthorityInformation": {
+        "OCSP": [
+          "http://ocsp.digicert.com"
+        ],
+        "CAIssuers": [
+          "http://cacerts.digicert.com/DigiCertSHA2HighAssuranceServerCA.crt"
+        ]
+      },
+      "SubjectAlternativeNames": [
+        "DNS:github.com",
+        "DNS:www.github.com"
       ],
-      "CAIssuers": [
-        "http://cacerts.digicert.com/DigiCertSHA2HighAssuranceServerCA.crt"
+      "CertificatePolicies": [
+        "2.16.840.1.114412.1.1",
+        "2.23.140.1.2.2"
+      ],
+      "CRLDistributionPoints": [
+        "http://crl3.digicert.com/sha2-ha-server-g6.crl",
+        "http://crl4.digicert.com/sha2-ha-server-g6.crl"
       ]
     },
-    "SubjectAlternativeNames": [
-      "DNS:github.com",
-      "DNS:www.github.com"
-    ],
-    "CertificatePolicies": [
-      "2.16.840.1.114412.1.1",
-      "2.23.140.1.2.2"
-    ],
-    "CRLDistributionPoints": [
-      "http://crl3.digicert.com/sha2-ha-server-g6.crl",
-      "http://crl4.digicert.com/sha2-ha-server-g6.crl"
-    ],
     "SignatureAlgorithm": "SHA256-RSA",
     "Signature": "86:32:8f:9c:15:b8:af:e8:d1:de:08:3a:44:0e:71:20:24:d6:fc:0e:58:31:cc:aa:b4:ad:1c:d5:0c:c5:af:c4:bb:fe:5f:ac:90:6a:42:c8:21:eb:25:f1:6b:2c:37:b2:2a:a8:1a:6e:f2:d1:4f:a6:2f:bc:cf:3a:d8:c1:9f:30:c0:ec:93:eb:0a:5a:dc:cb:6c:32:1c:60:6e:ec:6e:f8:86:a5:4f:a0:b4:6d:6a:07:4a:21:58:d0:29:7d:65:8a:c8:da:6a:ba:ab:f0:75:21:33:00:40:6f:85:c5:13:e6:27:73:6c:ae:ea:e3:96:d0:53:db:c1:21:68:10:cf:e3:d8:50:b0:14:ec:a9:98:cf:b8:ce:61:5d:3d:a3:6d:93:34:c4:13:fa:11:66:a3:dd:be:10:19:70:49:e2:04:4d:81:2c:1f:2e:59:c6:2c:53:45:3b:ee:f6:13:f4:d0:2c:84:6e:28:6d:e4:e4:ca:e4:48:89:1b:ab:ec:22:1f:ee:12:d4:6c:75:e9:cc:0b:15:74:e9:6d:9f:db:40:1f:e2:24:85:a3:4b:a4:e9:cd:6b:c8:77:9f:87:4f:05:73:00:38:a5:23:54:68:fc:a2:3d:bf:18:19:0e:a8:fd:b9:5e:8c:5c:e8:fc:e4:a2:52:70:ee:79:a7:d2:27:4a:7a:49"
   },
@@ -285,21 +285,21 @@ $ x509meta --pem chain.pem
         "MaxPathLength": 0
       },
       "SubjectKeyIdentifier": "51:68:ff:90:af:02:07:75:3c:cc:d9:65:64:62:a2:12:b8:59:72:3b",
-      "AuthorityKeyIdentifier": "b1:3e:c3:69:03:f8:bf:47:01:d4:98:26:1a:08:02:ef:63:64:2b:c3"
-    },
-    "AuthorityInformation": {
-      "OCSP": [
-        "http://ocsp.digicert.com"
+      "AuthorityKeyIdentifier": "b1:3e:c3:69:03:f8:bf:47:01:d4:98:26:1a:08:02:ef:63:64:2b:c3",
+      "AuthorityInformation": {
+        "OCSP": [
+          "http://ocsp.digicert.com"
+        ],
+        "CAIssuers": null
+      },
+      "SubjectAlternativeNames": [],
+      "CertificatePolicies": [
+        "2.5.29.32.0"
       ],
-      "CAIssuers": null
+      "CRLDistributionPoints": [
+        "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl"
+      ]
     },
-    "SubjectAlternativeNames": [],
-    "CertificatePolicies": [
-      "2.5.29.32.0"
-    ],
-    "CRLDistributionPoints": [
-      "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl"
-    ],
     "SignatureAlgorithm": "SHA256-RSA",
     "Signature": "18:8a:95:89:03:e6:6d:df:5c:fc:1d:68:ea:4a:8f:83:d6:51:2f:8d:6b:44:16:9e:ac:63:f5:d2:6e:6c:84:99:8b:aa:81:71:84:5b:ed:34:4e:b0:b7:79:92:29:cc:2d:80:6a:f0:8e:20:e1:79:a4:fe:03:47:13:ea:f5:86:ca:59:71:7d:f4:04:96:6b:d3:59:58:3d:fe:d3:31:25:5c:18:38:84:a3:e6:9f:82:fd:8c:5b:98:31:4e:cd:78:9e:1a:fd:85:cb:49:aa:f2:27:8b:99:72:fc:3e:aa:d5:41:0b:da:d5:36:a1:bf:1c:6e:47:49:7f:5e:d9:48:7c:03:d9:fd:8b:49:a0:98:26:42:40:eb:d6:92:11:a4:64:0a:57:54:c4:f5:1d:d6:02:5e:6b:ac:ee:c4:80:9a:12:72:fa:56:93:d7:ff:bf:30:85:06:30:bf:0b:7f:4e:ff:57:05:9d:24:ed:85:c3:2b:fb:a6:75:a8:ac:2d:16:ef:7d:79:27:b2:eb:c2:9d:0b:07:ea:aa:85:d3:01:a3:20:28:41:59:43:28:d2:81:e3:aa:f6:ec:7b:3b:77:b6:40:62:80:05:41:45:01:ef:17:06:3e:de:c0:33:9b:67:d3:61:2e:72:87:e4:69:fc:12:00:57:40:1e:70:f5:1e:c9:b4"
   }
